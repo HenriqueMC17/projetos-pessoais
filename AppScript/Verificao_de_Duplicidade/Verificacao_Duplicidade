@@ -1,0 +1,39 @@
+/**
+ * Sistema de Verificação de Duplicidade - Google Apps Script
+ * 
+ * ⚠️ ATENÇÃO: Este código foi modularizado para melhor organização e compreensão.
+ * 
+ * O sistema foi dividido nos seguintes arquivos:
+ * 
+ * 📁 ESTRUTURA MODULAR:
+ * 
+ * 1. config.js
+ *    - Constantes e configurações do sistema
+ *    - CONFIG (menu, colunas, cores, mensagens)
+ * 
+ * 2. utils.js
+ *    - Funções utilitárias reutilizáveis
+ *    - normalizarTexto(), obterPlanilhaAtiva(), obterValoresColunas()
+ * 
+ * 3. formatacao.js
+ *    - Formatação e marcação visual
+ *    - marcarCelulaDuplicada(), limparMarcacoesDuplicados(), limparMarcacaoCelula()
+ * 
+ * 4. verificacao.js
+ *    - Lógica de verificação de duplicados
+ *    - verificarDuplicadosManual(), processarDuplicados(), exibirResultadoVerificacao()
+ * 
+ * 5. eventos.js
+ *    - Eventos e inicialização
+ *    - onOpen(), onEdit(), verificarDuplicadoEmTempoReal()
+ * 
+ * 📝 NOTA: No Google Apps Script, todos os arquivos .js/.gs são carregados automaticamente.
+ * Não é necessário fazer imports ou includes. Apenas certifique-se de que todos os
+ * arquivos estejam no mesmo projeto.
+ * 
+ * @author Sistema de Verificação de Duplicidade
+ * @version 2.1 - Modularizado
+ */
+
+// Este arquivo foi mantido para referência histórica.
+// Todo o código funcional foi movido para os arquivos modulares listados acima.

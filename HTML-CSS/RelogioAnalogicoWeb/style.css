@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  text-align: center;
+}
+.clock {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 40px auto;
+  background: #fff;
+  border: 8px solid #333;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #aaa;
+}
+.hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  background: #333;
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(0deg);
+  border-radius: 6px;
+}
+.hour {
+  width: 10px;
+  height: 70px;
+  background: #222;
+  z-index: 3;
+}
+.minute {
+  width: 6px;
+  height: 100px;
+  background: #444;
+  z-index: 2;
+}
+.second {
+  width: 3px;
+  height: 120px;
+  background: #e33;
+  z-index: 1;
+}
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  background: #333;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+.numbers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+.numbers span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #222;
+  transform: translate(-50%, -50%) rotate(calc(30deg * var(--i))) translateY(-120px) rotate(calc(-30deg * var(--i)));
+}

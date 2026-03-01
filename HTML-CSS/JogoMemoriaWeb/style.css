@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  text-align: center;
+}
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  grid-gap: 15px;
+  justify-content: center;
+  margin: 30px auto 20px auto;
+}
+.card {
+  width: 80px;
+  height: 80px;
+  background: #2196f3;
+  color: #fff;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 2px 8px #aaa;
+  transition: background 0.2s, color 0.2s;
+}
+.card.virada, .card.completa {
+  background: #fff;
+  color: #2196f3;
+  cursor: default;
+}
+.card.completa {
+  background: #4caf50;
+  color: #fff;
+}
+button {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  background: #2196f3;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+button:hover {
+  background: #1769aa;
+}
+#status {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  color: #333;
+}

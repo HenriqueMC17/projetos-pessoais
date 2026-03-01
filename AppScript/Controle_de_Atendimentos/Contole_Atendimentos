@@ -1,0 +1,47 @@
+/**
+ * Sistema de Controle de Atendimentos - Google Apps Script
+ * 
+ * ⚠️ ATENÇÃO: Este código foi modularizado para melhor organização e compreensão.
+ * 
+ * O sistema foi dividido nos seguintes arquivos:
+ * 
+ * 📁 ESTRUTURA MODULAR:
+ * 
+ * 1. config.js
+ *    - Constantes e configurações do sistema
+ *    - CONFIG, EMAILS_POR_SETOR
+ * 
+ * 2. utils.js
+ *    - Funções utilitárias reutilizáveis
+ *    - obterAba(), validarCampoObrigatorio(), obterProximoId()
+ * 
+ * 3. formulario.js
+ *    - Gerenciamento de formulário
+ *    - novoAtendimento(), limparFormulario(), obterDadosFormulario()
+ * 
+ * 4. registro.js
+ *    - Lógica de registro de atendimentos
+ *    - registrarAtendimento(), processarNotificacao(), solicitarSetor(), validarFormulario()
+ * 
+ * 5. calendario.js
+ *    - Gerenciamento de calendário
+ *    - criarEventoCalendario(), formatarDescricaoEvento()
+ * 
+ * 6. dashboard.js
+ *    - Gerenciamento de dashboard
+ *    - contarIndicadores(), processarContadores(), atualizarDashboard()
+ * 
+ * 7. eventos.js
+ *    - Eventos do sistema
+ *    - onEdit()
+ * 
+ * 📝 NOTA: No Google Apps Script, todos os arquivos .js/.gs são carregados automaticamente.
+ * Não é necessário fazer imports ou includes. Apenas certifique-se de que todos os
+ * arquivos estejam no mesmo projeto.
+ * 
+ * @author Sistema de Controle de Atendimentos
+ * @version 2.1 - Modularizado
+ */
+
+// Este arquivo foi mantido para referência histórica.
+// Todo o código funcional foi movido para os arquivos modulares listados acima.

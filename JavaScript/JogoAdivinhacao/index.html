@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Adivinhação</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Jogo de Adivinhação</h1>
+            <p>Tente adivinhar o número secreto!</p>
+        </header>
+
+        <div class="game-container">
+            <div class="difficulty-selector">
+                <h3>Escolha a dificuldade:</h3>
+                <div class="difficulty-buttons">
+                    <button class="difficulty-btn active" data-difficulty="easy">Fácil (1-50)</button>
+                    <button class="difficulty-btn" data-difficulty="medium">Médio (1-100)</button>
+                    <button class="difficulty-btn" data-difficulty="hard">Difícil (1-200)</button>
+                    <button class="difficulty-btn" data-difficulty="expert">Expert (1-500)</button>
+                </div>
+            </div>
+
+            <div class="game-info">
+                <div class="info-item">
+                    <span class="label">Tentativas:</span>
+                    <span id="attempts">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Máximo:</span>
+                    <span id="max-attempts">10</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Recorde:</span>
+                    <span id="best-score">-</span>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <input type="number" id="guess-input" placeholder="Digite um número..." min="1">
+                <button id="guess-btn">Tentar</button>
+                <button id="new-game-btn">Novo Jogo</button>
+            </div>
+
+            <div class="feedback" id="feedback">
+                <p>Escolha uma dificuldade e comece a jogar!</p>
+            </div>
+
+            <div class="history" id="history">
+                <h3>Histórico de Tentativas:</h3>
+                <div id="history-list"></div>
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <h3>Estatísticas</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Jogos Jogados:</span>
+                    <span id="games-played">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Vitórias:</span>
+                    <span id="games-won">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Taxa de Vitória:</span>
+                    <span id="win-rate">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Média de Tentativas:</span>
+                    <span id="avg-attempts">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="theme-toggle">
+            <button id="theme-btn">🌙 Modo Escuro</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
