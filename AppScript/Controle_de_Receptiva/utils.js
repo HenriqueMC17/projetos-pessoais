@@ -9,6 +9,31 @@
 // ================================
 
 /**
+ * Handle system errors consistently and optionally alert the user.
+ * @type {Object}
+ */
+const ErrorHandler = {
+  /**
+   * Logs and handles errors, alerting through UI when possible.
+   * @param {Error} error - The caught exception.
+   * @param {string} [customMessage] - Substituted error title to display.
+   */
+  handle: function(error, customMessage) {
+    console.error(`[System Error] ${customMessage ? customMessage + ' - ' : ''}`, error);
+    try {
+      const ui = SpreadsheetApp.getUi();
+      ui.alert(
+        "Atenção / Erro",
+        (customMessage ? customMessage + "\\n\\nDetalhes: " : "") + error.message,
+        ui.ButtonSet.OK
+      );
+    } catch (e) {
+      console.warn("Unable to display UI alert for error:", error);
+    }
+  }
+};
+
+/**
  * Obtém ou cria a aba de controle
  * @param {GoogleAppsScript.Spreadsheet.Spreadsheet} ss - Planilha ativa
  * @param {string} nomeAba - Nome da aba

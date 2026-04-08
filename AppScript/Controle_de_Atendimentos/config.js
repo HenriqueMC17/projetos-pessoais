@@ -12,7 +12,7 @@
  * Mapeamento de e-mails por setor
  * @type {Object<string, Array<string>>}
  */
-const EMAILS_POR_SETOR = {
+const EMAILS_POR_SETOR = Object.freeze({
   'Administrativo': ['admin.centro@ccbeu.org'],
   'Pedagógico': ['pedagogico@ccbeu.org'],
   'TI': ['ti.centro@ccbeu.org'],
@@ -30,13 +30,13 @@ const EMAILS_POR_SETOR = {
     'priscila.amaral@espro.org.br',
     'fabiola.campos@espro.org.br'
   ]
-};
+});
 
 /**
  * Configurações do sistema
  * @type {Object}
  */
-const CONFIG = {
+const CONFIG = Object.freeze({
   // Nomes das abas
   SHEETS: {
     FORM: 'Form',
@@ -97,5 +97,5 @@ const CONFIG = {
     ERRO_CALENDARIO: 'Erro ao criar evento no calendário. Verifique o console para mais detalhes.',
     ERRO_DASHBOARD: 'Erro ao atualizar dashboard. Verifique o console para mais detalhes.'
   }
-};
+});
 

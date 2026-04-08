@@ -43,12 +43,7 @@ function onOpen() {
       .addToUi();
       
   } catch (error) {
-    console.error("Erro ao criar menu:", error);
-    const ui = SpreadsheetApp.getUi();
-    const mensagemErro = (typeof MENSAGENS !== 'undefined' && MENSAGENS.ERRO_INICIALIZACAO) 
-      ? MENSAGENS.ERRO_INICIALIZACAO 
-      : "Erro ao inicializar o sistema. Verifique o console para mais detalhes.";
-    ui.alert("Erro", mensagemErro, ui.ButtonSet.OK);
+    ErrorHandler.handle(error, (typeof MENSAGENS !== 'undefined' && MENSAGENS.ERRO_INICIALIZACAO) ? MENSAGENS.ERRO_INICIALIZACAO : "Erro ao inicializar o sistema.");
   }
 }
 
@@ -122,16 +117,11 @@ function gerarTabelasComPrompt() {
       // Feedback de sucesso (já exibido durante a geração em lotes)
       // Não precisa exibir novamente aqui
     } catch (error) {
-      console.error("Erro ao gerar tabelas em lotes:", error);
-      const mensagemErro = error.message || "Ocorreu um erro ao gerar as tabelas em lotes.";
-      ui.alert("Erro", mensagemErro, ui.ButtonSet.OK);
+      ErrorHandler.handle(error, "Ocorreu um erro ao gerar as tabelas em lotes.");
     }
     
   } catch (error) {
-    console.error("Erro ao gerar tabelas:", error);
-    const ui = SpreadsheetApp.getUi();
-    const mensagemErro = error.message || (typeof MENSAGENS !== 'undefined' ? MENSAGENS.ERRO_GERAR_TABELAS : "Ocorreu um erro ao gerar as tabelas.");
-    ui.alert("Erro", mensagemErro, ui.ButtonSet.OK);
+    ErrorHandler.handle(error, (typeof MENSAGENS !== 'undefined' && MENSAGENS.ERRO_GERAR_TABELAS) ? MENSAGENS.ERRO_GERAR_TABELAS : "Ocorreu um erro ao gerar as tabelas.");
   }
 }
 
@@ -163,9 +153,7 @@ function gerarTabelas() {
       console.error("Função gerarTabelasComPrompt não está disponível");
     }
   } catch (error) {
-    console.error("Erro em gerarTabelas:", error);
-    const ui = SpreadsheetApp.getUi();
-    ui.alert("Erro", "Ocorreu um erro ao executar a função. Verifique o console para mais detalhes.", ui.ButtonSet.OK);
+    ErrorHandler.handle(error, "Ocorreu um erro ao executar a função gerarTabelas.");
   }
 }
 
@@ -203,9 +191,7 @@ function testarSistema() {
     console.log("Teste do Sistema:", resultados);
     
   } catch (error) {
-    console.error("Erro ao testar sistema:", error);
-    const ui = SpreadsheetApp.getUi();
-    ui.alert("Erro", "Erro ao executar teste: " + error.message, ui.ButtonSet.OK);
+    ErrorHandler.handle(error, "Erro ao testar sistema");
   }
 }
 

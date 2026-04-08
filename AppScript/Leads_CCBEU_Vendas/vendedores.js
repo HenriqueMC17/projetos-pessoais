@@ -89,12 +89,7 @@ function abrirCadastroVendedor() {
 
     SpreadsheetApp.getUi().showModalDialog(html, "➕ Cadastrar Novo Vendedor");
   } catch (error) {
-    console.error("Erro ao abrir cadastro de vendedor:", error);
-    SpreadsheetApp.getUi().alert(
-      "Erro",
-      "Ocorreu um erro ao abrir o cadastro de vendedor:\n\n" + error.message,
-      SpreadsheetApp.getUi().ButtonSet.OK
-    );
+    ErrorHandler.handle(error, "Erro ao abrir o cadastro de vendedor");
   }
 }
 
@@ -205,12 +200,7 @@ function abrirRenomearVendedor() {
 
     SpreadsheetApp.getUi().showModalDialog(html, "✏️ Renomear Vendedor");
   } catch (error) {
-    console.error("Erro ao abrir renomear vendedor:", error);
-    SpreadsheetApp.getUi().alert(
-      "Erro",
-      "Ocorreu um erro ao abrir a função de renomear vendedor:\n\n" + error.message,
-      SpreadsheetApp.getUi().ButtonSet.OK
-    );
+    ErrorHandler.handle(error, "Erro ao abrir a função de renomear vendedor");
   }
 }
 
@@ -288,12 +278,7 @@ function abrirRemoverVendedor() {
 
     SpreadsheetApp.getUi().showModalDialog(html, "❌ Remover Vendedor");
   } catch (error) {
-    console.error("Erro ao abrir remover vendedor:", error);
-    SpreadsheetApp.getUi().alert(
-      "Erro",
-      "Ocorreu um erro ao abrir a função de remover vendedor:\n\n" + error.message,
-      SpreadsheetApp.getUi().ButtonSet.OK
-    );
+    ErrorHandler.handle(error, "Erro ao abrir a função de remover vendedor");
   }
 }
 
@@ -373,12 +358,7 @@ function abrirReatribuirVendedor() {
 
     SpreadsheetApp.getUi().showModalDialog(html, "🔄 Reatribuir Leads");
   } catch (error) {
-    console.error("Erro ao abrir reatribuir vendedor:", error);
-    SpreadsheetApp.getUi().alert(
-      "Erro",
-      "Ocorreu um erro ao abrir a função de reatribuir leads:\n\n" + error.message,
-      SpreadsheetApp.getUi().ButtonSet.OK
-    );
+    ErrorHandler.handle(error, "Erro ao abrir a função de reatribuir leads");
   }
 }
 

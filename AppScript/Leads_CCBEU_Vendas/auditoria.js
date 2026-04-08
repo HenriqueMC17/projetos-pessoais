@@ -37,13 +37,7 @@ function abrirAuditoria() {
     SpreadsheetApp.getUi().showModalDialog(html, "🕵️ Auditoria dos Leads");
 
   } catch (error) {
-    console.error("Erro ao abrir auditoria:", error);
-    SpreadsheetApp.getUi().alert(
-      "Erro",
-      "Ocorreu um erro ao abrir a auditoria:\n\n" + error.message + "\n\n" +
-      "Verifique o console para mais detalhes.",
-      SpreadsheetApp.getUi().ButtonSet.OK
-    );
+    ErrorHandler.handle(error, "Ocorreu um erro ao abrir a auditoria");
   }
 }
 

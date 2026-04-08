@@ -20,12 +20,7 @@ function onOpen() {
       .addItem(CONFIG.MENU_ITEM, CONFIG.MENU_FUNCTION)
       .addToUi();
   } catch (error) {
-    console.error("Erro ao criar menu:", error);
-    SpreadsheetApp.getUi().alert(
-      "Erro",
-      CONFIG.MENSAGENS.ERRO_INICIALIZACAO,
-      SpreadsheetApp.getUi().ButtonSet.OK
-    );
+    ErrorHandler.handle(error, CONFIG.MENSAGENS.ERRO_INICIALIZACAO);
   }
 }
 

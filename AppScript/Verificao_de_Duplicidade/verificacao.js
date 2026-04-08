@@ -44,12 +44,7 @@ function verificarDuplicadosManual() {
     console.log(`Verificação concluída: ${resultado.duplicados.length} duplicados encontrados`);
     
   } catch (error) {
-    console.error("Erro ao verificar duplicados:", error);
-    ui.alert(
-      "Erro",
-      CONFIG.MENSAGENS.ERRO_VERIFICACAO + "\n\n" + error.message,
-      ui.ButtonSet.OK
-    );
+    ErrorHandler.handle(error, CONFIG.MENSAGENS.ERRO_VERIFICACAO);
   }
 }
 

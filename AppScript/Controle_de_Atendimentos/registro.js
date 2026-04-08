@@ -52,13 +52,7 @@ function registrarAtendimento() {
     SpreadsheetApp.flush();
     
   } catch (error) {
-    console.error("Erro ao registrar atendimento:", error);
-    const ui = SpreadsheetApp.getUi();
-    ui.alert(
-      "Erro",
-      CONFIG.MENSAGENS.ERRO_REGISTRO + "\n\n" + error.message,
-      ui.ButtonSet.OK
-    );
+    ErrorHandler.handle(error, CONFIG.MENSAGENS.ERRO_REGISTRO);
   }
 }
 

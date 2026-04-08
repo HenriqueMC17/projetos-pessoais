@@ -31,12 +31,7 @@ function novoAtendimento() {
     );
     
   } catch (error) {
-    console.error("Erro ao preparar formulário:", error);
-    SpreadsheetApp.getUi().alert(
-      "Erro",
-      "Erro ao preparar formulário: " + error.message,
-      SpreadsheetApp.getUi().ButtonSet.OK
-    );
+    ErrorHandler.handle(error, "Erro ao preparar formulário");
   }
 }
 

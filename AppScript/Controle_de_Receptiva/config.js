@@ -12,7 +12,7 @@
  * Configurações do sistema
  * @type {Object}
  */
-const CONFIG = {
+const CONFIG = Object.freeze({
   SHEET_NAME: "CONTROLE DE RECEPTIVAS",
   MENU_TITLE: "📊 Gerar Tabelas",
   MENU_ITEM: "Gerar Tabelas",
@@ -66,37 +66,37 @@ const CONFIG = {
   
   // Dias da semana
   DOMINGO: 0
-};
+});
 
 /**
  * Lista de vendedoras do sistema
  * @type {Array<string>}
  */
-const VENDEDORAS = [
+const VENDEDORAS = Object.freeze([
   "ROBSON", "NATALIA", "FRANCINE", "JOSE", 
   "KARINA", "THATIELLE", "GIOVANNA", "THAYNA"
-];
+]);
 
 /**
  * Cabeçalhos das colunas da tabela
  * @type {Array<string>}
  */
-const CABECALHOS = ["VENDEDORA", "QUANTIDADE", "FECHOU"];
+const CABECALHOS = Object.freeze(["VENDEDORA", "QUANTIDADE", "FECHOU"]);
 
 /**
  * Nomes dos meses em português
  * @type {Array<string>}
  */
-const MESES = [
+const MESES = Object.freeze([
   "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
   "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
-];
+]);
 
 /**
  * Mensagens do sistema
  * @type {Object}
  */
-const MENSAGENS = {
+const MENSAGENS = Object.freeze({
   ERRO_INICIALIZACAO: "Erro ao inicializar o sistema. Verifique o console para mais detalhes.",
   ERRO_GERAR_TABELAS: "Ocorreu um erro ao gerar as tabelas. Verifique o console para mais detalhes.",
   SUCESSO_GERACAO: "Tabelas geradas com sucesso para {mes} de {ano}!",
@@ -112,5 +112,5 @@ const MENSAGENS = {
   ERRO_SELECAO_INVALIDA: "Seleção inválida. Digite números separados por vírgula (ex: 1,2,3).",
   SUCESSO_LOTE: "Lote de {quantidade} tabela(s) gerado(s) com sucesso!",
   PROMPT_CONTINUAR: "Deseja gerar mais tabelas? (Sim/Não)"
-};
+});
 

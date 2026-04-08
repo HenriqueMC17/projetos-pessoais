@@ -165,13 +165,7 @@ function aplicarPermissoes() {
     SpreadsheetApp.getUi().alert("Permissões Aplicadas", mensagem, SpreadsheetApp.getUi().ButtonSet.OK);
 
   } catch (error) {
-    console.error("Erro ao aplicar permissões:", error);
-    SpreadsheetApp.getUi().alert(
-      "Erro ao aplicar permissões",
-      "Ocorreu um erro ao processar as permissões:\n\n" + error.message + "\n\n" +
-      "Verifique o console para mais detalhes.",
-      SpreadsheetApp.getUi().ButtonSet.OK
-    );
+    ErrorHandler.handle(error, "Erro ao aplicar permissões");
   }
 }
 

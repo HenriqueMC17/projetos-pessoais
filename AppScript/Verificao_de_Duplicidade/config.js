@@ -12,7 +12,7 @@
  * Configurações do sistema
  * @type {Object}
  */
-const CONFIG = {
+const CONFIG = Object.freeze({
   MENU_TITLE: "Utilitários",
   MENU_ITEM: "Verificar Duplicados",
   MENU_FUNCTION: "verificarDuplicadosManual",
@@ -43,5 +43,5 @@ const CONFIG = {
     SEM_DADOS: "Nenhum dado encontrado para verificação.",
     TITULO_VERIFICACAO: "Verificação Concluída"
   }
-};
+});
 

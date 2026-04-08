@@ -9,6 +9,31 @@
 // ================================
 
 /**
+ * Handle system errors consistently and optionally alert the user.
+ * @type {Object}
+ */
+const ErrorHandler = {
+  /**
+   * Logs and handles errors, alerting through UI when possible.
+   * @param {Error} error - The caught exception.
+   * @param {string} [customMessage] - Substituted error title to display.
+   */
+  handle: function(error, customMessage) {
+    console.error(`[System Error] ${customMessage ? customMessage + ' - ' : ''}`, error);
+    try {
+      const ui = SpreadsheetApp.getUi();
+      ui.alert(
+        "Atenção / Erro",
+        (customMessage ? customMessage + "\\n\\nDetalhes: " : "") + error.message,
+        ui.ButtonSet.OK
+      );
+    } catch (e) {
+      console.warn("Unable to display UI alert for error:", error);
+    }
+  }
+};
+
+/**
  * Normaliza um texto para comparação, removendo acentos, espaços extras e convertendo para minúsculas
  * @param {*} texto - Texto a ser normalizado
  * @returns {string} Texto normalizado ou string vazia se o texto for inválido

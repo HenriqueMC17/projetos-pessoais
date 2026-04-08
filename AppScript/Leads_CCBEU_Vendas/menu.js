@@ -36,11 +36,7 @@ function onOpen() {
       .addToUi();
       
   } catch (error) {
-    console.error("Erro ao criar menu:", error);
-    SpreadsheetApp.getUi().alert(
-      "Erro ao inicializar o sistema de distribuição de leads.\n" +
-      "Verifique o console para mais detalhes."
-    );
+    ErrorHandler.handle(error, "Erro ao inicializar o sistema de distribuição de leads. Verifique o console.");
   }
 }
 
@@ -70,11 +66,7 @@ function abrirDialogDistribuicao() {
 
     SpreadsheetApp.getUi().showModalDialog(html, CONFIG.DIALOG_TITLE);
   } catch (error) {
-    console.error("Erro ao abrir diálogo:", error);
-    SpreadsheetApp.getUi().alert(
-      "Erro ao abrir o diálogo de distribuição.\n" +
-      "Detalhes: " + error.message
-    );
+    ErrorHandler.handle(error, "Erro ao abrir o diálogo de distribuição");
   }
 }
 
