@@ -102,12 +102,14 @@ function obterValoresColunas(sheet, linhaInicial) {
     
     const numLinhas = lastRow - linhaInicial + 1;
     
-    // Obter valores das colunas D e C
-    const rangeValores = sheet.getRange(linhaInicial, CONFIG.COLUNA_VALOR, numLinhas, 1);
-    const rangeResponsaveis = sheet.getRange(linhaInicial, CONFIG.COLUNA_RESPONSAVEL, numLinhas, 1);
+    // Obter valores das colunas C e D em uma única chamada de API
+    const minCol = Math.min(CONFIG.COLUNA_RESPONSAVEL, CONFIG.COLUNA_VALOR);
+    const range = sheet.getRange(linhaInicial, minCol, numLinhas, 2);
+    const dados = range.getValues();
     
-    const valores = rangeValores.getValues().flat();
-    const responsaveis = rangeResponsaveis.getValues().flat();
+    // Mapear os dados de forma dinâmica e segura para suas respectivas colunas
+    const responsaveis = dados.map(linha => linha[CONFIG.COLUNA_RESPONSAVEL - minCol]);
+    const valores = dados.map(linha => linha[CONFIG.COLUNA_VALOR - minCol]);
     
     return {
       valores,

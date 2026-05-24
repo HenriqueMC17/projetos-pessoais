@@ -110,14 +110,17 @@ function gerarTabelasComPrompt() {
       return; // Usuário cancelou ou não selecionou nenhuma
     }
     
-    // Gerar tabelas em lotes de até 5
+    // Gerar todas as tabelas em um único lote otimizado
     try {
-      gerarTabelasPorMesAnoEmLotes(mes, ano, vendedorasSelecionadas);
+      gerarTabelasPorMesAno(mes, ano, vendedorasSelecionadas);
       
-      // Feedback de sucesso (já exibido durante a geração em lotes)
-      // Não precisa exibir novamente aqui
+      const mesNome = MESES[mes - 1];
+      const msgSucesso = MENSAGENS.SUCESSO_GERACAO
+        .replace("{mes}", mesNome)
+        .replace("{ano}", ano.toString());
+      ui.alert("Sucesso", msgSucesso, ui.ButtonSet.OK);
     } catch (error) {
-      ErrorHandler.handle(error, "Ocorreu um erro ao gerar as tabelas em lotes.");
+      ErrorHandler.handle(error, "Ocorreu um erro ao gerar as tabelas.");
     }
     
   } catch (error) {

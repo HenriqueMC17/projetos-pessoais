@@ -19,6 +19,20 @@ function obterFeriados(ano) {
     return new Set();
   }
   
+  const cacheKey = "feriados_" + ano;
+  const cache = CacheService.getScriptCache();
+  
+  try {
+    const cachedData = cache.get(cacheKey);
+    if (cachedData) {
+      const timestamps = JSON.parse(cachedData);
+      console.log(`Feriados obtidos do cache: ${timestamps.length} para o ano ${ano}`);
+      return new Set(timestamps);
+    }
+  } catch (cacheError) {
+    console.warn("Erro ao acessar o CacheService:", cacheError);
+  }
+  
   try {
     const options = {
       'method': 'get',
@@ -67,7 +81,15 @@ function obterFeriados(ano) {
       })
       .filter(timestamp => timestamp !== null);
     
-    console.log(`Feriados obtidos: ${feriados.length} para o ano ${ano}`);
+    console.log(`Feriados obtidos da API: ${feriados.length} para o ano ${ano}`);
+    
+    // Salvar no cache por 6 horas (21600 segundos)
+    try {
+      cache.put(cacheKey, JSON.stringify(feriados), 21600);
+    } catch (cacheError) {
+      console.warn("Erro ao gravar no CacheService:", cacheError);
+    }
+    
     return new Set(feriados);
     
   } catch (error) {

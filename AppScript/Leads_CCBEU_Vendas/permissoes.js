@@ -33,29 +33,8 @@ function aplicarPermissoes() {
       }
     }
 
-    // Definição das permissões por aba
-    const configuracoes = [
-      { 
-        aba: "Base_Jose", 
-        nomeVendedor: "Jose",
-        acessos: [EMAILS.jose, EMAILS.gestora, EMAILS.voce] 
-      },
-      { 
-        aba: "Base_Francine", 
-        nomeVendedor: "Francine",
-        acessos: [EMAILS.francine, EMAILS.gestora, EMAILS.voce] 
-      },
-      { 
-        aba: "Base_Thayna", 
-        nomeVendedor: "Thayna",
-        acessos: [EMAILS.thayna, EMAILS.gestora, EMAILS.voce] 
-      },
-      { 
-        aba: "Base_Natalia", 
-        nomeVendedor: "Natalia",
-        acessos: [EMAILS.natalia, EMAILS.gestora, EMAILS.voce] 
-      }
-    ];
+    // Obter todos os vendedores disponíveis dinamicamente
+    const vendedoresDisponiveis = obterVendedoresDisponiveis();
 
     const resultados = {
       sucesso: [],
@@ -63,13 +42,58 @@ function aplicarPermissoes() {
       erros: []
     };
 
-    // Processar cada configuração
-    configuracoes.forEach(cfg => {
+    // Processar cada vendedor dinamicamente
+    vendedoresDisponiveis.forEach(vendedor => {
       try {
-        const aba = ss.getSheetByName(cfg.aba);
+        const aba = ss.getSheetByName(vendedor.nomeAba);
         
         if (!aba) {
-          resultados.avisos.push("Aba '" + cfg.aba + "' não encontrada. Pulando...");
+          resultados.avisos.push("Aba '" + vendedor.nomeAba + "' não encontrada. Pulando...");
+          return;
+        }
+
+        // Determinar o e-mail do vendedor
+        let emailVendedor = null;
+        
+        // 1. Tentar ler de Developer Metadata
+        try {
+          const metadados = aba.getDeveloperMetadata();
+          const metaEmail = metadados.find(m => m.getKey() === "seller_email");
+          if (metaEmail) {
+            emailVendedor = metaEmail.getValue();
+          }
+        } catch (e) {
+          console.warn("Erro ao buscar metadados para aba: " + vendedor.nomeAba, e);
+        }
+
+        // 2. Se não encontrar, tentar buscar por chave baseada no nome (ex: Jose -> jose em EMAILS)
+        if (!emailVendedor) {
+          const nomeLimpo = vendedor.nome.replace(/^Base_/, "").toLowerCase();
+          if (EMAILS[nomeLimpo]) {
+            emailVendedor = EMAILS[nomeLimpo];
+          }
+        }
+
+        // 3. Se ainda não encontrar, tentar obter de proteções existentes (excluindo gestores)
+        if (!emailVendedor) {
+          try {
+            const protecoesExistentes = aba.getProtections(SpreadsheetApp.ProtectionType.SHEET);
+            if (protecoesExistentes.length > 0) {
+              const editores = protecoesExistentes[0].getEditors();
+              const gestores = [EMAILS.gestora, EMAILS.voce];
+              const dono = ss.getOwner().getEmail();
+              const editorVendedor = editores.find(e => !gestores.includes(e.getEmail()) && e.getEmail() !== dono);
+              if (editorVendedor) {
+                emailVendedor = editorVendedor.getEmail();
+              }
+            }
+          } catch (e) {
+            console.warn("Erro ao buscar editores antigos:", e);
+          }
+        }
+
+        if (!emailVendedor) {
+          resultados.avisos.push("Não foi possível determinar o e-mail para '" + vendedor.nomeAba + "'. Aba não alterada.");
           return;
         }
 
@@ -80,10 +104,10 @@ function aplicarPermissoes() {
         if (protecoes.length > 0) {
           // Usar proteção existente
           protecao = protecoes[0];
-          resultados.avisos.push("Aba '" + cfg.aba + "' já estava protegida. Atualizando permissões...");
+          resultados.avisos.push("Aba '" + vendedor.nomeAba + "' já estava protegida. Atualizando permissões...");
         } else {
           // Criar nova proteção
-          protecao = aba.protect().setDescription("Proteção automática - " + cfg.nomeVendedor);
+          protecao = aba.protect().setDescription("Proteção automática - " + vendedor.nome);
         }
 
         // Remover todos os editores atuais
@@ -97,11 +121,12 @@ function aplicarPermissoes() {
         });
 
         // Adicionar editores autorizados
-        cfg.acessos.forEach(email => {
+        const acessos = [emailVendedor, EMAILS.gestora, EMAILS.voce];
+        acessos.forEach(email => {
           try {
             protecao.addEditor(email);
           } catch (e) {
-            resultados.avisos.push("Não foi possível adicionar " + email + " à aba '" + cfg.aba + "': " + e.message);
+            resultados.avisos.push("Não foi possível adicionar " + email + " à aba '" + vendedor.nomeAba + "': " + e.message);
           }
         });
 
@@ -121,11 +146,11 @@ function aplicarPermissoes() {
           aba.hideSheet();
         }
 
-        resultados.sucesso.push(cfg.aba + " - " + cfg.nomeVendedor);
+        resultados.sucesso.push(vendedor.nomeAba + " - " + vendedor.nome);
 
       } catch (error) {
-        console.error("Erro ao processar aba " + cfg.aba + ":", error);
-        resultados.erros.push(cfg.aba + ": " + error.message);
+        console.error("Erro ao processar aba " + vendedor.nomeAba + ":", error);
+        resultados.erros.push(vendedor.nomeAba + ": " + error.message);
       }
     });
 

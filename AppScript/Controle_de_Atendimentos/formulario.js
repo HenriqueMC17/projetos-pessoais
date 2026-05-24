@@ -60,21 +60,17 @@ function limparFormulario(form) {
  * @returns {Object} Objeto com dados básicos e valores do formulário
  */
 function obterDadosFormulario(form) {
-  // Obter dados básicos (A2:C2)
-  const dadosBasicos = form.getRange(
+  // Obter todos os valores da linha em uma única chamada de API
+  const todosValores = form.getRange(
     CONFIG.FORM.LINHA_DADOS,
     CONFIG.FORM.COLUNA_INICIAL,
     1,
-    3
+    CONFIG.FORM.COLUNA_FINAL
   ).getValues()[0];
   
-  // Obter valores do formulário (D2:M2)
-  const valoresForm = form.getRange(
-    CONFIG.FORM.LINHA_DADOS,
-    4, // Coluna D
-    1,
-    CONFIG.FORM.COLUNA_FINAL - 3
-  ).getValues()[0];
+  // Dividir os dados básicos (colunas A a C) e os valores do formulário (colunas D a M)
+  const dadosBasicos = todosValores.slice(0, 3);
+  const valoresForm = todosValores.slice(3);
   
   return {
     dadosBasicos,

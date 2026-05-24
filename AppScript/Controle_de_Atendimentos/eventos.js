@@ -27,7 +27,7 @@ function onEdit(e) {
     
     // Verificar se a edição foi na aba Dados
     if (sheet.getName() === CONFIG.SHEETS.DADOS) {
-      contarIndicadores();
+      contarIndicadores(true);
     }
     
   } catch (error) {

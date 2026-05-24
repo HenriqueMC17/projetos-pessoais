@@ -38,8 +38,8 @@ function registrarAtendimento() {
     const novoId = obterProximoId(dados);
     dados.appendRow([data, telefone, nomeCliente, novoId, ...valoresForm]);
     
-    // Atualizar indicadores
-    contarIndicadores();
+    // Atualizar indicadores de forma silenciosa para evitar alertas duplicados na UI
+    contarIndicadores(true);
     
     // Processar notificação e evento no calendário
     const resultado = processarNotificacao(form, dadosBasicos, valoresForm, ui);

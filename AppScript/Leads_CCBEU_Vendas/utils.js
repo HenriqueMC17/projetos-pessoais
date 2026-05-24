@@ -99,19 +99,19 @@ function atualizarColunaEmLote(sheet, coluna, mapaAtualizacoes, primeiraLinha) {
   if (ultimaLinha < primeiraLinha) return;
   
   const numLinhas = ultimaLinha - primeiraLinha + 1;
-  const dadosAtuais = sheet.getRange(primeiraLinha, 1, numLinhas, sheet.getLastColumn()).getValues();
+  const rangeColuna = sheet.getRange(primeiraLinha, coluna, numLinhas, 1);
+  const dadosAtuais = rangeColuna.getValues();
   
   // Preparar valores atualizados
   const valoresColuna = dadosAtuais.map((linha, idx) => {
     const linhaReal = idx + primeiraLinha;
     return mapaAtualizacoes[linhaReal] !== undefined 
-      ? mapaAtualizacoes[linhaReal] 
-      : linha[coluna - 1];
+      ? [mapaAtualizacoes[linhaReal]] 
+      : [linha[0]];
   });
   
   // Atualizar em uma única operação
-  sheet.getRange(primeiraLinha, coluna, valoresColuna.length, 1)
-    .setValues(valoresColuna.map(v => [v]));
+  rangeColuna.setValues(valoresColuna);
 }
 
 /**

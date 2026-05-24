@@ -13,8 +13,17 @@
  * Conta status e tipos de atendimento
  * @returns {void}
  */
-function contarIndicadores() {
-  const ui = SpreadsheetApp.getUi();
+function contarIndicadores(silencioso) {
+  silencioso = (silencioso === true);
+  let ui = null;
+  if (!silencioso) {
+    try {
+      ui = SpreadsheetApp.getUi();
+    } catch (uiError) {
+      console.warn("Não foi possível acessar a UI:", uiError);
+      silencioso = true; // Força silêncio se a UI não puder ser instanciada (ex: gatilho simples)
+    }
+  }
   
   try {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -27,11 +36,13 @@ function contarIndicadores() {
     
     const totalLinhas = dados.getLastRow();
     if (totalLinhas < CONFIG.DADOS.LINHA_CABECALHO + 1) {
-      ui.alert(
-        "Informação",
-        CONFIG.MENSAGENS.SEM_DADOS,
-        ui.ButtonSet.OK
-      );
+      if (!silencioso && ui) {
+        ui.alert(
+          "Informação",
+          CONFIG.MENSAGENS.SEM_DADOS,
+          ui.ButtonSet.OK
+        );
+      }
       return;
     }
     
@@ -52,20 +63,28 @@ function contarIndicadores() {
     
     console.log(`Dashboard atualizado: ${resultado.totalRegistros} registros processados`);
     
-    ui.alert(
-      "Sucesso",
-      CONFIG.MENSAGENS.SUCESSO_DASHBOARD,
-      ui.ButtonSet.OK
-    );
+    if (!silencioso && ui) {
+      ui.alert(
+        "Sucesso",
+        CONFIG.MENSAGENS.SUCESSO_DASHBOARD,
+        ui.ButtonSet.OK
+      );
+    }
     
   } catch (error) {
     console.error("Erro ao atualizar dashboard:", error);
-    const ui = SpreadsheetApp.getUi();
-    ui.alert(
-      "Erro",
-      CONFIG.MENSAGENS.ERRO_DASHBOARD + "\n\n" + error.message,
-      ui.ButtonSet.OK
-    );
+    if (!silencioso) {
+      try {
+        const fallbackUi = ui || SpreadsheetApp.getUi();
+        fallbackUi.alert(
+          "Erro",
+          CONFIG.MENSAGENS.ERRO_DASHBOARD + "\n\n" + error.message,
+          fallbackUi.ButtonSet.OK
+        );
+      } catch (e) {
+        console.warn("Não foi possível alertar o erro na UI:", error);
+      }
+    }
   }
 }
 

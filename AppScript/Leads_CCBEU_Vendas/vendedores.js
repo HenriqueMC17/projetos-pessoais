@@ -119,6 +119,11 @@ function cadastrarVendedor(nome, email) {
 
     // 1. Criar nova aba (visível por padrão)
     const novaAba = ss.insertSheet(nomeNormalizado);
+    try {
+      novaAba.addDeveloperMetadata("seller_email", emailNormalizado);
+    } catch (e) {
+      console.warn("Erro ao salvar metadados do vendedor:", e);
+    }
 
     // 2. Criar cabeçalho padrão obrigatório conforme especificação
     const headers = [

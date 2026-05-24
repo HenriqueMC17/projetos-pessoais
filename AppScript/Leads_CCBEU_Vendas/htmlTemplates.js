@@ -20,111 +20,132 @@ function obterHTMLDialogo() {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base target="_top">
   <title>Distribuição de Leads</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      padding: 16px;
       min-height: 100vh;
-      color: #333;
+      display: flex;
+      flex-direction: column;
     }
     .container {
-      max-width: 500px;
+      width: 100%;
+      max-width: 480px;
       margin: 0 auto;
-      background: white;
+      background: #ffffff;
       border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-      padding: 30px;
-      animation: slideIn 0.3s ease-out;
-    }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
     h3 {
-      margin: 0 0 25px 0;
-      color: #1a73e8;
-      font-size: 24px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e3a8a;
       text-align: center;
-      padding-bottom: 15px;
-      border-bottom: 2px solid #e0e0e0;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px dashed #e2e8f0;
     }
-    .form-group { margin-bottom: 25px; }
+    .form-group {
+      margin-bottom: 18px;
+    }
     label {
       font-weight: 600;
+      font-size: 13px;
       display: block;
-      margin-bottom: 8px;
-      color: #555;
-      font-size: 14px;
+      margin-bottom: 6px;
+      color: #475569;
     }
     .input-field {
       width: 100%;
-      padding: 12px;
-      margin-bottom: 5px;
-      border: 2px solid #e0e0e0;
-      border-radius: 6px;
-      font-size: 15px;
-      transition: all 0.3s ease;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      color: inherit;
+      transition: all 0.2s ease;
+      background-color: #f8fafc;
     }
     .input-field:focus {
       outline: none;
-      border-color: #1a73e8;
-      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+      border-color: #3b82f6;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
     }
-    .input-field.error { border-color: #ea4335; }
+    .input-field.error {
+      border-color: #ef4444;
+      background-color: #fef2f2;
+    }
     .error-message {
-      color: #ea4335;
+      color: #ef4444;
       font-size: 12px;
-      margin-top: 5px;
+      margin-top: 4px;
+      font-weight: 500;
       display: none;
     }
-    .error-message.show { display: block; }
+    .error-message.show {
+      display: block;
+    }
     .vendedores-list {
-      background: #f8f9fa;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
-      padding: 15px;
-      margin-top: 10px;
+      padding: 12px;
+      max-height: 200px;
+      overflow-y: auto;
     }
     .vendedores-list label {
-      font-weight: normal;
+      font-weight: 500;
       display: flex;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       cursor: pointer;
-      padding: 10px;
+      padding: 8px;
       border-radius: 6px;
       transition: background-color 0.2s;
     }
-    .vendedores-list label:hover { background-color: #e8f0fe; }
-    .vendedores-list label:last-child { margin-bottom: 0; }
+    .vendedores-list label:hover {
+      background-color: #e2e8f0;
+    }
+    .vendedores-list label:last-child {
+      margin-bottom: 0;
+    }
     .vendedores-list input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      margin-right: 12px;
+      width: 16px;
+      height: 16px;
+      margin-right: 10px;
       cursor: pointer;
-      accent-color: #1a73e8;
+      accent-color: #3b82f6;
     }
     .btn {
       width: 100%;
-      padding: 14px 24px;
-      background: linear-gradient(135deg, #1a73e8 0%, #1664c4 100%);
-      color: #fff;
+      padding: 12px;
+      background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+      color: #ffffff;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(26, 115, 232, 0.3);
-      margin-top: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15);
+      margin-top: auto;
     }
     .btn:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(26, 115, 232, 0.4);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(29, 78, 216, 0.25);
     }
-    .btn:active:not(:disabled) { transform: translateY(0); }
+    .btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
     .btn:disabled {
       opacity: 0.6;
       cursor: not-allowed;
@@ -136,13 +157,13 @@ function obterHTMLDialogo() {
     .btn.loading::after {
       content: "";
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       top: 50%;
       left: 50%;
-      margin-left: -10px;
-      margin-top: -10px;
-      border: 3px solid #ffffff;
+      margin-left: -8px;
+      margin-top: -8px;
+      border: 2px solid #ffffff;
       border-radius: 50%;
       border-top-color: transparent;
       animation: spin 0.8s linear infinite;
@@ -152,42 +173,41 @@ function obterHTMLDialogo() {
     }
     .message {
       padding: 12px;
-      border-radius: 6px;
-      margin-bottom: 20px;
+      border-radius: 8px;
+      margin-bottom: 16px;
       display: none;
       animation: fadeIn 0.3s ease;
       white-space: pre-line;
-      line-height: 1.6;
-      font-size: 14px;
-      max-height: 300px;
-      overflow-y: auto;
+      line-height: 1.5;
+      font-size: 13px;
+      font-weight: 500;
     }
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .message.show { display: block; }
+    .message.show {
+      display: block;
+    }
     .message.success {
-      background-color: #e8f5e9;
-      color: #2e7d32;
-      border: 1px solid #4caf50;
+      background-color: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
     }
     .message.error {
-      background-color: #ffebee;
-      color: #c62828;
-      border: 1px solid #ef5350;
+      background-color: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
     }
-    .checkbox-group {
-      display: flex;
-      align-items: center;
+    .checkbox-group span {
+      font-size: 13px;
+      color: #334155;
     }
-    .checkbox-group input { flex-shrink: 0; }
-    .checkbox-group span { flex: 1; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h3><strong>Distribuição de Leads</strong></h3>
+    <h3>Distribuição de Leads</h3>
     <div id="message" class="message"></div>
     <div class="form-group">
       <label for="quantidade">Quantidade por vendedor:</label>
@@ -196,23 +216,22 @@ function obterHTMLDialogo() {
         Por favor, informe uma quantidade válida (mínimo 1).
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="flex: 1; display: flex; flex-direction: column;">
       <label>Selecione os vendedores:</label>
-      <div class="vendedores-list" id="vendedores-list">
-        <p style="text-align: center; color: #666; padding: 20px;">Carregando vendedores...</p>
+      <div class="vendedores-list" id="vendedores-list" style="flex: 1;">
+        <p style="text-align: center; color: #64748b; padding: 20px; font-size: 13px;">Carregando vendedores...</p>
       </div>
       <div class="error-message" id="vendedores-error">
         Por favor, selecione pelo menos um vendedor.
       </div>
     </div>
-    <button class="btn" id="btnDistribuir" onclick="enviar()">Distribuir</button>
+    <button class="btn" id="btnDistribuir" onclick="enviar()">Distribuir Leads</button>
   </div>
   <script>
     function mostrarMensagem(texto, tipo) {
       const messageDiv = document.getElementById('message');
       messageDiv.textContent = texto;
       messageDiv.className = 'message ' + tipo + ' show';
-      messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       if (tipo === 'error') {
         setTimeout(function() { messageDiv.classList.remove('show'); }, 5000);
       }
@@ -260,21 +279,21 @@ function obterHTMLDialogo() {
               let mensagem = resultado.mensagem || 'Leads distribuídos com sucesso!';
               if (resultado.estatisticas) {
                 const stats = resultado.estatisticas;
-                mensagem = '✅ Distribuição concluída!\\n\\n';
-                mensagem += '📊 Total distribuído: ' + stats.totalDistribuido + ' leads\\n';
-                mensagem += '📋 Total disponível: ' + stats.totalDisponivel + ' leads\\n\\n';
-                mensagem += '👥 Distribuição por vendedor:\\n';
+                mensagem = '✅ Distribuição concluída!\n\n';
+                mensagem += '📊 Total distribuído: ' + stats.totalDistribuido + ' leads\n';
+                mensagem += '📋 Total disponível: ' + stats.totalDisponivel + ' leads\n\n';
+                mensagem += '👥 Distribuição por vendedor:\n';
                 for (var vendedor in stats.porVendedor) {
                   if (stats.porVendedor.hasOwnProperty(vendedor)) {
-                    mensagem += '   • ' + vendedor + ': ' + stats.porVendedor[vendedor] + ' leads\\n';
+                    mensagem += '   • ' + vendedor + ': ' + stats.porVendedor[vendedor] + ' leads\n';
                   }
                 }
                 if (stats.totalDistribuido < stats.totalNecessario) {
-                  mensagem += '\\n⚠️ Atenção: Nem todos os leads solicitados puderam ser distribuídos.';
+                  mensagem += '\n⚠️ Atenção: Não há leads suficientes.';
                 }
               }
               mostrarMensagem(mensagem, 'success');
-              setTimeout(function() { google.script.host.close(); }, 3000);
+              setTimeout(function() { google.script.host.close(); }, 3500);
             } else {
               throw new Error('Resposta inválida do servidor');
             }
@@ -282,7 +301,7 @@ function obterHTMLDialogo() {
           .withFailureHandler(function(error) {
             btnDistribuir.disabled = false;
             btnDistribuir.classList.remove('loading');
-            btnDistribuir.textContent = 'Distribuir';
+            btnDistribuir.textContent = 'Distribuir Leads';
             const mensagemErro = error && error.message ? error.message : 'Erro desconhecido ao distribuir leads';
             mostrarMensagem('❌ ' + mensagemErro, 'error');
           })
@@ -290,18 +309,18 @@ function obterHTMLDialogo() {
       } catch (error) {
         btnDistribuir.disabled = false;
         btnDistribuir.classList.remove('loading');
-        btnDistribuir.textContent = 'Distribuir';
+        btnDistribuir.textContent = 'Distribuir Leads';
         mostrarMensagem('❌ Erro: ' + error.message, 'error');
       }
     }
-    // Carregar vendedores dinamicamente ao abrir o diálogo
+    
     function carregarVendedores() {
       google.script.run
         .withSuccessHandler(function(vendedores) {
           const vendedoresList = document.getElementById('vendedores-list');
           
           if (!vendedores || vendedores.length === 0) {
-            vendedoresList.innerHTML = '<p style="text-align: center; color: #ea4335; padding: 20px;">Nenhum vendedor cadastrado. Cadastre um vendedor primeiro.</p>';
+            vendedoresList.innerHTML = '<p style="text-align: center; color: #ef4444; padding: 20px; font-size: 13px; font-weight: 500;">Nenhum vendedor cadastrado. Cadastre um vendedor primeiro.</p>';
             return;
           }
           
@@ -316,7 +335,6 @@ function obterHTMLDialogo() {
           
           vendedoresList.innerHTML = html;
           
-          // Adicionar event listeners aos checkboxes
           const checkboxes = document.querySelectorAll('.vendedores-list input[type="checkbox"]');
           checkboxes.forEach(checkbox => {
             checkbox.addEventListener("change", function() {
@@ -326,13 +344,11 @@ function obterHTMLDialogo() {
         })
         .withFailureHandler(function(error) {
           const vendedoresList = document.getElementById('vendedores-list');
-          vendedoresList.innerHTML = '<p style="text-align: center; color: #ea4335; padding: 20px;">Erro ao carregar vendedores: ' + error.message + '</p>';
-          console.error('Erro ao carregar vendedores:', error);
+          vendedoresList.innerHTML = '<p style="text-align: center; color: #ef4444; padding: 20px; font-size: 13px;">Erro ao carregar vendedores: ' + error.message + '</p>';
         })
         .obterVendedoresDisponiveis();
     }
     
-    // Carregar vendedores quando a página carregar
     carregarVendedores();
     
     document.getElementById("quantidade").addEventListener("keypress", function(event) {
@@ -355,7 +371,239 @@ function obterHTMLDialogo() {
  * @returns {string} HTML completo da interface
  */
 function obterHTMLAuditoria() {
-  return '<!DOCTYPE html><html><head><base target="_top"><style>body{font-family:Arial;margin:20px}h1{color:#333}.ok{color:#1a7f37;font-weight:bold}.alerta{color:#c77f00;font-weight:bold}.erro{color:#c1121f;font-weight:bold}table{border-collapse:collapse;width:100%;margin-top:15px}th,td{border:1px solid #ccc;padding:6px}th{background:#f0f0f0}</style></head><body><h1>🕵️ Auditoria dos Leads</h1><p>Aguarde, processando...</p><script>google.script.run.withSuccessHandler(function(r){document.body.innerHTML="";function bloco(titulo,dados,classe){const div=document.createElement("div");div.innerHTML=\'<h2 class="\'+classe+\'">\'+titulo+\' (\'+dados.length+\')</h2>\';if(dados.length===0){div.innerHTML+=\'<p class="ok">Nenhum problema encontrado.</p>\';document.body.appendChild(div);return}const table=document.createElement("table");const cols=Object.keys(dados[0]);table.innerHTML="<tr>"+cols.map(function(c){return"<th>"+c+"</th>"}).join("")+"</tr>";dados.forEach(function(l){const row="<tr>"+cols.map(function(c){return"<td>"+(l[c]||"")+"</td>"}).join("")+"</tr>";table.innerHTML+=row});div.appendChild(table);document.body.appendChild(div)}bloco("Leads Duplicados",r.duplicados,"erro");bloco("Divergências de Status",r.divergencias,"alerta");bloco("Leads Sem Status",r.semStatus,"alerta");bloco("Sem Data de Primeiro Contato",r.semPrimeiroContato,"alerta");bloco("Leads Distribuídos para o Vendedor Errado",r.inconsistenciasDistribuicao,"erro")}).withFailureHandler(function(error){document.body.innerHTML=\'<h1>🕵️ Auditoria dos Leads</h1><div class="erro"><h2>Erro ao executar auditoria</h2><p>\'+error.message+\'</p></div>\'}).executarAuditoria();</script></body></html>';
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base target="_top">
+  <title>Auditoria dos Leads</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      padding: 24px;
+      min-height: 100vh;
+    }
+    .header {
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 16px;
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1e3a8a;
+    }
+    .status-badge {
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      background-color: #e2e8f0;
+      color: #475569;
+    }
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 0;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e2e8f0;
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 16px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .section-card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .section-title.ok { color: #059669; }
+    .section-title.alerta { color: #d97706; }
+    .section-title.erro { color: #dc2626; }
+    
+    .count-tag {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .ok .count-tag { background: #d1fae5; color: #065f46; }
+    .alerta .count-tag { background: #fef3c7; color: #92400e; }
+    .erro .count-tag { background: #fee2e2; color: #991b1b; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 13px;
+      text-align: left;
+    }
+    th {
+      background-color: #f1f5f9;
+      color: #475569;
+      font-weight: 600;
+      padding: 10px 12px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+    }
+    tr:hover td {
+      background-color: #f8fafc;
+    }
+    .no-issues {
+      padding: 12px;
+      border-radius: 8px;
+      background-color: #f0fdf4;
+      color: #166534;
+      font-weight: 500;
+      font-size: 13px;
+      border: 1px solid #bbf7d0;
+    }
+    .error-alert {
+      padding: 16px;
+      border-radius: 8px;
+      background-color: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🕵️ Relatório de Auditoria dos Leads</h1>
+    <span class="status-badge" id="status-badge">Analisando base de leads...</span>
+  </div>
+
+  <div id="content">
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <p style="font-weight: 500; color: #64748b;">Processando dados e verificando consistência...</p>
+    </div>
+  </div>
+
+  <script>
+    google.script.run
+      .withSuccessHandler(function(r) {
+        document.getElementById("status-badge").textContent = "Auditoria Concluída";
+        document.getElementById("status-badge").style.backgroundColor = "#d1fae5";
+        document.getElementById("status-badge").style.color = "#065f46";
+        
+        const contentDiv = document.getElementById("content");
+        contentDiv.innerHTML = "";
+        
+        criarBloco(contentDiv, "Leads Duplicados (ID)", r.duplicados, "erro");
+        criarBloco(contentDiv, "Divergências de Status (Base vs Vendedor)", r.divergencias, "alerta");
+        criarBloco(contentDiv, "Leads Atribuídos Sem Status na Base", r.semStatus, "alerta");
+        criarBloco(contentDiv, "Leads Sem Data de Primeiro Contato (Em Andamento)", r.semPrimeiroContato, "alerta");
+        criarBloco(contentDiv, "Leads Associados a Vendedor Incorreto", r.inconsistenciasDistribuicao, "erro");
+      })
+      .withFailureHandler(function(error) {
+        document.getElementById("status-badge").textContent = "Falha na Auditoria";
+        document.getElementById("status-badge").style.backgroundColor = "#fee2e2";
+        document.getElementById("status-badge").style.color = "#991b1b";
+        
+        const contentDiv = document.getElementById("content");
+        contentDiv.innerHTML = \`
+          <div class="error-alert">
+            <h3 style="font-weight:700; margin-bottom:6px;">Erro ao executar auditoria</h3>
+            <p>\${error.message || 'Erro desconhecido. Por favor, verifique se os cabeçalhos das planilhas são compatíveis.'}</p>
+          </div>
+        \`;
+      })
+      .executarAuditoria();
+      
+    function criarBloco(container, titulo, dados, tipo) {
+      const card = document.createElement("div");
+      card.className = "section-card";
+      
+      const header = document.createElement("div");
+      header.className = "section-title " + tipo;
+      header.innerHTML = \`<span>\${titulo}</span> <span class="count-tag">\${dados.length}</span>\`;
+      card.appendChild(header);
+      
+      if (dados.length === 0) {
+        const okDiv = document.createElement("div");
+        okDiv.className = "no-issues";
+        okDiv.textContent = "✓ Nenhuma inconsistência encontrada.";
+        card.appendChild(okDiv);
+      } else {
+        const table = document.createElement("table");
+        const cols = Object.keys(dados[0]);
+        
+        // Mapear cabeçalhos para português amigável
+        const cabecalhoMapa = {
+          id: "ID Lead",
+          linha: "Linha",
+          linhas: "Linhas Duplicadas",
+          quantidade: "Ocorrências",
+          vendedor: "Vendedor",
+          base: "Status Base Geral",
+          vendedorStatus: "Status na Aba do Vendedor",
+          vendedorCorreto: "Vendedor Correto (Base)",
+          vendedorErrado: "Vendedor da Aba Atual",
+          statusBase: "Status do Lead"
+        };
+        
+        let headerRow = "<tr>";
+        cols.forEach(function(c) {
+          const text = cabecalhoMapa[c] || c;
+          headerRow += "<th>" + text + "</th>";
+        });
+        headerRow += "</tr>";
+        table.innerHTML = headerRow;
+        
+        dados.forEach(function(item) {
+          let row = "<tr>";
+          cols.forEach(function(c) {
+            row += "<td>" + (item[c] !== undefined ? item[c] : "") + "</td>";
+          });
+          row += "</tr>";
+          table.innerHTML += row;
+        });
+        
+        const tableWrapper = document.createElement("div");
+        tableWrapper.style.overflowX = "auto";
+        tableWrapper.appendChild(table);
+        card.appendChild(tableWrapper);
+      }
+      
+      container.appendChild(card);
+    }
+  </script>
+</body>
+</html>`;
 }
 
 /**
@@ -363,7 +611,144 @@ function obterHTMLAuditoria() {
  * @returns {string} HTML completo da interface
  */
 function obterHTMLCadastroVendedor() {
-  return '<!DOCTYPE html><html><head><base target="_top"><style>body{font-family:Arial;padding:20px}label{font-weight:bold;display:block;margin-bottom:5px}input{width:100%;padding:8px;margin-bottom:15px;box-sizing:border-box;border:1px solid #ccc;border-radius:4px}button{background:#003366;color:white;padding:10px 18px;border:none;cursor:pointer;font-size:14px;width:100%;border-radius:4px}button:hover{background:#004488}</style></head><body><h2>➕ Cadastrar Novo Vendedor</h2><label>Nome do Vendedor:</label><input id="nome" type="text"><label>E-mail Corporativo:</label><input id="email" type="email"><button onclick="enviar()">Cadastrar</button><script>function enviar(){const nome=document.getElementById("nome").value.trim();const email=document.getElementById("email").value.trim();if(!nome||!email){alert("Preencha todos os campos.");return}google.script.run.withSuccessHandler(function(msg){alert(msg);google.script.host.close()}).withFailureHandler(function(error){alert("Erro: "+error.message)}).cadastrarVendedor(nome,email)}</script></body></html>';
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #0f172a;
+      padding: 16px;
+    }
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    label {
+      font-weight: 600;
+      font-size: 13px;
+      display: block;
+      margin-bottom: 5px;
+      color: #475569;
+    }
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: inherit;
+      background-color: #f8fafc;
+      transition: all 0.2s;
+    }
+    input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+    .alert-container {
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      display: none;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .alert-container.error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+      display: block;
+    }
+    .alert-container.success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      display: block;
+    }
+    button {
+      background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+      color: #ffffff;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      width: 100%;
+      border-radius: 6px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 10px rgba(29, 78, 216, 0.15);
+    }
+    button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(29, 78, 216, 0.25);
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h2>➕ Cadastrar Novo Vendedor</h2>
+  <div id="alert" class="alert-container"></div>
+  
+  <label for="nome">Nome do Vendedor:</label>
+  <input id="nome" type="text" placeholder="Ex: Robson">
+  
+  <label for="email">E-mail Corporativo:</label>
+  <input id="email" type="email" placeholder="Ex: robson@ccbeu.org">
+  
+  <button id="btn" onclick="enviar()">Cadastrar Vendedor</button>
+
+  <script>
+    function showMsg(txt, type) {
+      const alert = document.getElementById("alert");
+      alert.textContent = txt;
+      alert.className = "alert-container " + type;
+    }
+    
+    function enviar() {
+      const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const btn = document.getElementById("btn");
+      
+      if (!nome || !email) {
+        showMsg("Preencha todos os campos obrigatórios.", "error");
+        return;
+      }
+      
+      btn.disabled = true;
+      btn.textContent = "Processando...";
+      showMsg("", ""); // clear
+      
+      google.script.run
+        .withSuccessHandler(function(msg) {
+          showMsg(msg, "success");
+          setTimeout(function() {
+            google.script.host.close();
+          }, 3000);
+        })
+        .withFailureHandler(function(error) {
+          btn.disabled = false;
+          btn.textContent = "Cadastrar Vendedor";
+          showMsg("Erro: " + error.message, "error");
+        })
+        .cadastrarVendedor(nome, email);
+    }
+  </script>
+</body>
+</html>`;
 }
 
 /**
@@ -371,7 +756,143 @@ function obterHTMLCadastroVendedor() {
  * @returns {string} HTML completo da interface
  */
 function obterHTMLRenomearVendedor() {
-  return '<!DOCTYPE html><html><body style="font-family:Arial;padding:20px"><h2>✏️ Renomear Vendedor</h2><label>Nome atual da aba:</label><input id="antigo" type="text" style="width:100%;padding:6px;margin-bottom:10px;box-sizing:border-box;border:1px solid #ccc;border-radius:4px"><label>Novo nome da aba:</label><input id="novo" type="text" style="width:100%;padding:6px;margin-bottom:10px;box-sizing:border-box;border:1px solid #ccc;border-radius:4px"><button onclick="enviar()" style="padding:10px 20px;background:#003366;color:white;border:none;cursor:pointer;border-radius:4px;width:100%">Renomear</button><script>function enviar(){const antigo=document.getElementById("antigo").value.trim();const novo=document.getElementById("novo").value.trim();if(!antigo||!novo){alert("Preencha todos os campos.");return}if(!confirm("Renomear de \'"+antigo+"\' para \'"+novo+"\'?"))return;google.script.run.withSuccessHandler(function(msg){alert(msg);google.script.host.close()}).withFailureHandler(function(error){alert("Erro: "+error.message)}).renomearVendedor(antigo,novo)}</script></body></html>';
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #0f172a;
+      padding: 16px;
+    }
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    label {
+      font-weight: 600;
+      font-size: 13px;
+      display: block;
+      margin-bottom: 5px;
+      color: #475569;
+    }
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: inherit;
+      background-color: #f8fafc;
+      transition: all 0.2s;
+    }
+    input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+    .alert-container {
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      display: none;
+      font-weight: 500;
+    }
+    .alert-container.error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+      display: block;
+    }
+    .alert-container.success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      display: block;
+    }
+    button {
+      background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+      color: #ffffff;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      width: 100%;
+      border-radius: 6px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 10px rgba(29, 78, 216, 0.15);
+    }
+    button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(29, 78, 216, 0.25);
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h2>✏️ Renomear Vendedor</h2>
+  <div id="alert" class="alert-container"></div>
+  
+  <label for="antigo">Nome atual da aba:</label>
+  <input id="antigo" type="text" placeholder="Ex: Jose">
+  
+  <label for="novo">Novo nome da aba:</label>
+  <input id="novo" type="text" placeholder="Ex: Jose_Fares">
+  
+  <button id="btn" onclick="enviar()">Renomear Vendedor</button>
+
+  <script>
+    function showMsg(txt, type) {
+      const alert = document.getElementById("alert");
+      alert.textContent = txt;
+      alert.className = "alert-container " + type;
+    }
+    
+    function enviar() {
+      const antigo = document.getElementById("antigo").value.trim();
+      const novo = document.getElementById("novo").value.trim();
+      const btn = document.getElementById("btn");
+      
+      if (!antigo || !novo) {
+        showMsg("Preencha todos os campos.", "error");
+        return;
+      }
+      
+      btn.disabled = true;
+      btn.textContent = "Renomeando...";
+      showMsg("", "");
+      
+      google.script.run
+        .withSuccessHandler(function(msg) {
+          showMsg(msg, "success");
+          setTimeout(function() {
+            google.script.host.close();
+          }, 3000);
+        })
+        .withFailureHandler(function(error) {
+          btn.disabled = false;
+          btn.textContent = "Renomear Vendedor";
+          showMsg("Erro: " + error.message, "error");
+        })
+        .renomearVendedor(antigo, novo);
+    }
+  </script>
+</body>
+</html>`;
 }
 
 /**
@@ -379,7 +900,151 @@ function obterHTMLRenomearVendedor() {
  * @returns {string} HTML completo da interface
  */
 function obterHTMLRemoverVendedor() {
-  return '<!DOCTYPE html><html><body style="font-family:Arial;padding:20px"><h2>❌ Remover Vendedor</h2><label>Nome da aba do vendedor:</label><input id="nome" type="text" style="width:100%;padding:6px;margin-bottom:10px;box-sizing:border-box;border:1px solid #ccc;border-radius:4px"><button onclick="enviar()" style="padding:10px 20px;background:#8b0000;color:white;border:none;cursor:pointer;border-radius:4px;width:100%">Remover</button><script>function enviar(){const nome=document.getElementById("nome").value.trim();if(!nome){alert("Informe o nome da aba.");return}if(!confirm("Tem certeza que deseja remover o vendedor "+nome+"?"))return;google.script.run.withSuccessHandler(function(msg){alert(msg);google.script.host.close()}).withFailureHandler(function(error){alert("Erro: "+error.message)}).removerVendedor(nome)}</script></body></html>';
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #0f172a;
+      padding: 16px;
+    }
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #991b1b;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    label {
+      font-weight: 600;
+      font-size: 13px;
+      display: block;
+      margin-bottom: 5px;
+      color: #475569;
+    }
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      margin-bottom: 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: inherit;
+      background-color: #f8fafc;
+      transition: all 0.2s;
+    }
+    input:focus {
+      outline: none;
+      border-color: #ef4444;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+    .alert-container {
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      display: none;
+      font-weight: 500;
+    }
+    .alert-container.error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+      display: block;
+    }
+    .alert-container.success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      display: block;
+    }
+    button {
+      background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+      color: #ffffff;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      width: 100%;
+      border-radius: 6px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 10px rgba(185, 28, 28, 0.15);
+    }
+    button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(185, 28, 28, 0.25);
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .warning-text {
+      font-size: 11px;
+      color: #64748b;
+      margin-bottom: 12px;
+      text-align: center;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <h2>❌ Remover Vendedor</h2>
+  <div id="alert" class="alert-container"></div>
+  
+  <label for="nome">Nome da aba do vendedor:</label>
+  <input id="nome" type="text" placeholder="Ex: Natalia">
+  <p class="warning-text">⚠️ Esta ação removerá permanentemente a aba do vendedor e as referências associadas.</p>
+  
+  <button id="btn" onclick="enviar()">Remover Vendedor</button>
+
+  <script>
+    function showMsg(txt, type) {
+      const alert = document.getElementById("alert");
+      alert.textContent = txt;
+      alert.className = "alert-container " + type;
+    }
+    
+    function enviar() {
+      const nome = document.getElementById("nome").value.trim();
+      const btn = document.getElementById("btn");
+      
+      if (!nome) {
+        showMsg("Informe o nome da aba.", "error");
+        return;
+      }
+      
+      if (!confirm("Tem certeza que deseja remover o vendedor " + nome + "?\\nEsta operação é irreversível.")) {
+        return;
+      }
+      
+      btn.disabled = true;
+      btn.textContent = "Removendo...";
+      showMsg("", "");
+      
+      google.script.run
+        .withSuccessHandler(function(msg) {
+          showMsg(msg, "success");
+          setTimeout(function() {
+            google.script.host.close();
+          }, 3000);
+        })
+        .withFailureHandler(function(error) {
+          btn.disabled = false;
+          btn.textContent = "Remover Vendedor";
+          showMsg("Erro: " + error.message, "error");
+        })
+        .removerVendedor(nome);
+    }
+  </script>
+</body>
+</html>`;
 }
 
 /**
@@ -387,6 +1052,141 @@ function obterHTMLRemoverVendedor() {
  * @returns {string} HTML completo da interface
  */
 function obterHTMLReatribuirVendedor() {
-  return '<!DOCTYPE html><html><body style="font-family:Arial;padding:20px"><h2>🔄 Reatribuir Leads</h2><label>Vendedor que saiu:</label><input id="origem" type="text" style="width:100%;padding:6px;margin-bottom:10px;box-sizing:border-box;border:1px solid #ccc;border-radius:4px"><label>Reatribuir para:</label><input id="destino" type="text" style="width:100%;padding:6px;margin-bottom:10px;box-sizing:border-box;border:1px solid #ccc;border-radius:4px"><button onclick="enviar()" style="padding:10px 20px;background:#006400;color:white;border:none;cursor:pointer;border-radius:4px;width:100%">Reatribuir</button><script>function enviar(){const o=document.getElementById("origem").value.trim();const d=document.getElementById("destino").value.trim();if(!o||!d){alert("Preencha os nomes.");return}google.script.run.withSuccessHandler(function(msg){alert(msg);google.script.host.close()}).withFailureHandler(function(error){alert("Erro: "+error.message)}).reatribuirVendedor(o,d)}</script></body></html>';
-}
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #0f172a;
+      padding: 16px;
+    }
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #047857;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    label {
+      font-weight: 600;
+      font-size: 13px;
+      display: block;
+      margin-bottom: 5px;
+      color: #475569;
+    }
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: inherit;
+      background-color: #f8fafc;
+      transition: all 0.2s;
+    }
+    input:focus {
+      outline: none;
+      border-color: #10b981;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+    }
+    .alert-container {
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      display: none;
+      font-weight: 500;
+    }
+    .alert-container.error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+      display: block;
+    }
+    .alert-container.success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      display: block;
+    }
+    button {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      color: #ffffff;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      width: 100%;
+      border-radius: 6px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 10px rgba(4, 120, 87, 0.15);
+    }
+    button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(4, 120, 87, 0.25);
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔄 Reatribuir Leads (Inativo)</h2>
+  <div id="alert" class="alert-container"></div>
+  
+  <label for="origem">Vendedor de Origem (Aba antiga):</label>
+  <input id="origem" type="text" placeholder="Ex: Thayna">
+  
+  <label for="destino">Vendedor de Destino (Aba nova):</label>
+  <input id="destino" type="text" placeholder="Ex: Jose">
+  
+  <button id="btn" onclick="enviar()">Transferir e Reatribuir Leads</button>
 
+  <script>
+    function showMsg(txt, type) {
+      const alert = document.getElementById("alert");
+      alert.textContent = txt;
+      alert.className = "alert-container " + type;
+    }
+    
+    function enviar() {
+      const o = document.getElementById("origem").value.trim();
+      const d = document.getElementById("destino").value.trim();
+      const btn = document.getElementById("btn");
+      
+      if (!o || !d) {
+        showMsg("Por favor, informe a origem e o destino.", "error");
+        return;
+      }
+      
+      btn.disabled = true;
+      btn.textContent = "Transferindo...";
+      showMsg("", "");
+      
+      google.script.run
+        .withSuccessHandler(function(msg) {
+          showMsg(msg, "success");
+          setTimeout(function() {
+            google.script.host.close();
+          }, 3000);
+        })
+        .withFailureHandler(function(error) {
+          btn.disabled = false;
+          btn.textContent = "Transferir e Reatribuir Leads";
+          showMsg("Erro: " + error.message, "error");
+        })
+        .reatribuirVendedor(o, d);
+    }
+  </script>
+</body>
+</html>`;
+}
