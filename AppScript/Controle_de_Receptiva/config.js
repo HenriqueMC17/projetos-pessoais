@@ -69,13 +69,84 @@ const CONFIG = Object.freeze({
 });
 
 /**
+ * Obtém a lista de vendedoras (padrão + customizadas salvas nas propriedades do documento)
+ * @returns {Array<string>}
+ */
+function obterListaVendedoras() {
+  const defaults = [
+    "ROBSON", "NATALIA", "FRANCINE", "JOSE", 
+    "KARINA", "THATIELLE", "GIOVANNA", "THAYNA"
+  ];
+  try {
+    const props = PropertiesService.getDocumentProperties();
+    const custom = props.getProperty("VENDEDORAS_CUSTOM");
+    if (custom) {
+      const customArray = JSON.parse(custom);
+      if (Array.isArray(customArray)) {
+        const combinada = [...defaults];
+        customArray.forEach(v => {
+          const nomeLimpo = String(v).trim().toUpperCase();
+          if (nomeLimpo && !combinada.includes(nomeLimpo)) {
+            combinada.push(nomeLimpo);
+          }
+        });
+        return combinada;
+      }
+    }
+  } catch (e) {
+    console.error("Erro ao obter lista de vendedoras customizadas:", e);
+  }
+  return defaults;
+}
+
+/**
+ * Adiciona um novo vendedor na lista persistente do documento
+ * @param {string} nome - Nome do novo vendedor
+ * @returns {boolean} true se adicionado com sucesso, false se já existia ou houve erro
+ */
+function adicionarNovoVendedor(nome) {
+  if (!nome || nome.trim() === "") return false;
+  const nomeLimpo = nome.trim().toUpperCase();
+  
+  const defaults = [
+    "ROBSON", "NATALIA", "FRANCINE", "JOSE", 
+    "KARINA", "THATIELLE", "GIOVANNA", "THAYNA"
+  ];
+  
+  try {
+    const props = PropertiesService.getDocumentProperties();
+    let customArray = [];
+    const custom = props.getProperty("VENDEDORAS_CUSTOM");
+    if (custom) {
+      try {
+        customArray = JSON.parse(custom);
+        if (!Array.isArray(customArray)) {
+          customArray = [];
+        }
+      } catch (err) {
+        customArray = [];
+      }
+    }
+    
+    // Verificar se já existe nos defaults ou nos customizados
+    if (defaults.includes(nomeLimpo) || customArray.includes(nomeLimpo)) {
+      return false;
+    }
+    
+    customArray.push(nomeLimpo);
+    props.setProperty("VENDEDORAS_CUSTOM", JSON.stringify(customArray));
+    return true;
+  } catch (e) {
+    console.error("Erro ao salvar novo vendedor:", e);
+    return false;
+  }
+}
+
+/**
  * Lista de vendedoras do sistema
  * @type {Array<string>}
  */
-const VENDEDORAS = Object.freeze([
-  "ROBSON", "NATALIA", "FRANCINE", "JOSE", 
-  "KARINA", "THATIELLE", "GIOVANNA", "THAYNA"
-]);
+let VENDEDORAS = obterListaVendedoras();
 
 /**
  * Cabeçalhos das colunas da tabela

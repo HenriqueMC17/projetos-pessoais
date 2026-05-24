@@ -63,8 +63,7 @@ function processarDuplicados(sheet, valores, responsaveis, linhaInicial) {
   let totalVazios = 0;
   
   const numLinhas = valores.length;
-  // Arrays para atualização em lote (1 coluna)
-  const backgrounds = Array.from({length: numLinhas}, () => [null]);
+  // Array para atualização em lote (1 coluna)
   const notes = Array.from({length: numLinhas}, () => [null]);
   
   for (let i = 0; i < numLinhas; i++) {
@@ -94,8 +93,7 @@ function processarDuplicados(sheet, valores, responsaveis, linhaInicial) {
         responsavel: responsavel
       });
       
-      // Configurar formatação em lote na memória
-      backgrounds[i][0] = CONFIG.CORES.DUPLICADO_MANUAL;
+      // Configurar nota em lote na memória
       notes[i][0] = CONFIG.MENSAGENS.NOTA_DUPLICADO.replace("{linha}", linhaOriginal);
     } else {
       // Primeira ocorrência - adicionar ao mapa
@@ -106,24 +104,21 @@ function processarDuplicados(sheet, valores, responsaveis, linhaInicial) {
     }
   }
   
-  // Aplicar atualizações de formatação e notas em lote de forma extremamente rápida
+  // Aplicar atualizações de notas em lote de forma extremamente rápida
   if (numLinhas > 0 && duplicados.length > 0) {
     try {
       const range = sheet.getRange(linhaInicial, CONFIG.COLUNA_VALOR, numLinhas, 1);
       
-      // Obter backgrounds e notas atuais para preservar formatação das células não duplicadas
-      const currentBackgrounds = range.getBackgrounds();
+      // Obter notas atuais para preservar notas manuais do usuário nas outras células
       const currentNotes = range.getNotes();
       
-      // Mesclar novos backgrounds e notas sem sobrescrever células que não são duplicadas
+      // Mesclar novas notas
       for (let i = 0; i < numLinhas; i++) {
-        if (backgrounds[i][0] !== null) {
-          currentBackgrounds[i][0] = backgrounds[i][0];
+        if (notes[i][0] !== null) {
           currentNotes[i][0] = notes[i][0];
         }
       }
       
-      range.setBackgrounds(currentBackgrounds);
       range.setNotes(currentNotes);
     } catch (e) {
       console.warn("Erro ao salvar marcações de duplicados em lote:", e);

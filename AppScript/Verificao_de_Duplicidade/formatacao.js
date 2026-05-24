@@ -21,7 +21,6 @@ function marcarCelulaDuplicada(sheet, linha, linhaOriginal, cor) {
     const cell = sheet.getRange(linha, CONFIG.COLUNA_VALOR);
     const nota = CONFIG.MENSAGENS.NOTA_DUPLICADO.replace("{linha}", linhaOriginal);
     
-    cell.setBackground(cor);
     cell.setNote(nota);
   } catch (error) {
     console.warn(`Erro ao marcar célula duplicada na linha ${linha}:`, error);
@@ -42,9 +41,19 @@ function limparMarcacoesDuplicados(sheet, linhaInicial) {
     const numLinhas = lastRow - linhaInicial + 1;
     const range = sheet.getRange(linhaInicial, CONFIG.COLUNA_VALOR, numLinhas, 1);
     
-    // Limpar cor de fundo e notas
-    range.setBackground(null);
-    range.clearNote();
+    // Obter as notas atuais
+    const currentNotes = range.getNotes();
+    const updatedNotes = currentNotes.map(row => {
+      const note = row[0];
+      // Se a nota contiver o texto padrão de duplicado, nós a limpamos (preservando notas manuais do usuário)
+      if (note && note.indexOf("Duplicado de linha") !== -1) {
+        return [""];
+      }
+      return [note];
+    });
+    
+    // Escrever notas de volta
+    range.setNotes(updatedNotes);
   } catch (error) {
     console.warn("Erro ao limpar marcações:", error);
   }
@@ -59,8 +68,10 @@ function limparMarcacoesDuplicados(sheet, linhaInicial) {
 function limparMarcacaoCelula(sheet, linha) {
   try {
     const cell = sheet.getRange(linha, CONFIG.COLUNA_VALOR);
-    cell.setBackground(null);
-    cell.clearNote();
+    const note = cell.getNote();
+    if (note && note.indexOf("Duplicado de linha") !== -1) {
+      cell.clearNote();
+    }
   } catch (error) {
     console.warn(`Erro ao limpar marcação da célula na linha ${linha}:`, error);
   }

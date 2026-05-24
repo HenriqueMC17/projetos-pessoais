@@ -22,7 +22,7 @@ const CONFIG = Object.freeze({
   COLUNA_RESPONSAVEL: 3, // Coluna C
   
   // Linha inicial para verificação
-  LINHA_INICIAL: 392,
+  LINHA_INICIAL: 2,
   
   // Cores para marcação visual
   CORES: {

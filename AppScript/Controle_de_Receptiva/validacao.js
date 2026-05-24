@@ -111,7 +111,11 @@ function solicitarVendedoras(ui, vendedorasDisponiveis) {
     listaVendedoras += `${index + 1}. ${vendedora}\n`;
   });
   
-  const mensagem = listaVendedoras + "\n" + MENSAGENS.PROMPT_VENDEDORAS;
+  // Adicionar a opção de cadastrar novo vendedor
+  const indiceAdicionar = vendedorasDisponiveis.length + 1;
+  listaVendedoras += `${indiceAdicionar}. [+ ADICIONAR NOVO VENDEDOR]\n`;
+  
+  const mensagem = listaVendedoras + "\n" + "Selecione as vendedoras que deseja incluir nas tabelas.\n\nDigite os números separados por vírgula (ex: 1,2,3,4,5) ou escolha a opção para adicionar um novo vendedor:";
   
   const resposta = ui.prompt(
     "Seleção de Vendedoras",
@@ -127,18 +131,64 @@ function solicitarVendedoras(ui, vendedorasDisponiveis) {
   
   if (!texto || texto === "") {
     ui.alert("Erro", MENSAGENS.ERRO_SELECAO_VENDEDORAS, ui.ButtonSet.OK);
-    return null;
+    return solicitarVendedoras(ui, vendedorasDisponiveis);
   }
   
-  // Processar seleção (números separados por vírgula)
-  const indices = texto.split(',').map(item => {
-    const num = parseInt(item.trim(), 10);
-    return isNaN(num) ? null : num;
-  }).filter(num => num !== null && num >= 1 && num <= vendedorasDisponiveis.length);
+  // Separar as escolhas do usuário
+  const partes = texto.split(',');
+  let selecionouAdicionar = false;
+  const indices = [];
+  
+  for (let i = 0; i < partes.length; i++) {
+    const num = parseInt(partes[i].trim(), 10);
+    if (!isNaN(num)) {
+      if (num === indiceAdicionar) {
+        selecionouAdicionar = true;
+      } else if (num >= 1 && num <= vendedorasDisponiveis.length) {
+        indices.push(num);
+      }
+    }
+  }
+  
+  // Se o usuário selecionou a opção de adicionar novo vendedor
+  if (selecionouAdicionar) {
+    const promptNovo = ui.prompt(
+      "Adicionar Novo Vendedor",
+      "Digite o nome do novo vendedor/vendedora:",
+      ui.ButtonSet.OK_CANCEL
+    );
+    
+    if (promptNovo.getSelectedButton() === ui.Button.OK) {
+      const nomeNovo = promptNovo.getResponseText().trim().toUpperCase();
+      if (nomeNovo !== "") {
+        const adicionado = adicionarNovoVendedor(nomeNovo);
+        if (adicionado) {
+          ui.alert("Sucesso", `Vendedor "${nomeNovo}" adicionado com sucesso!`, ui.ButtonSet.OK);
+          // Atualizar a variável global VENDEDORAS
+          if (typeof obterListaVendedoras === 'function') {
+            VENDEDORAS = obterListaVendedoras();
+          } else {
+            VENDEDORAS.push(nomeNovo);
+          }
+          // Chamar solicitarVendedoras novamente com a lista atualizada
+          return solicitarVendedoras(ui, VENDEDORAS);
+        } else {
+          ui.alert("Aviso", `O vendedor "${nomeNovo}" já existe ou não pôde ser adicionado.`, ui.ButtonSet.OK);
+          return solicitarVendedoras(ui, vendedorasDisponiveis);
+        }
+      } else {
+        ui.alert("Erro", "Nome do vendedor não pode estar em branco.", ui.ButtonSet.OK);
+        return solicitarVendedoras(ui, vendedorasDisponiveis);
+      }
+    } else {
+      // Se cancelou o prompt de adição, volta à tela de seleção original
+      return solicitarVendedoras(ui, vendedorasDisponiveis);
+    }
+  }
   
   if (indices.length === 0) {
     ui.alert("Erro", MENSAGENS.ERRO_SELECAO_INVALIDA, ui.ButtonSet.OK);
-    return null;
+    return solicitarVendedoras(ui, vendedorasDisponiveis);
   }
   
   // Converter índices em nomes de vendedoras (índices são 1-based)
