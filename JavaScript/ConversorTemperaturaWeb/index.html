@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Temperatura</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-thermometer-half"></i> Conversor de Temperatura</h1>
+            <p>Converta entre Celsius, Fahrenheit e Kelvin de forma simples e rápida</p>
+        </header>
+
+        <div class="converter-container">
+            <div class="conversion-section">
+                <div class="input-group">
+                    <label for="temperature-input">Temperatura:</label>
+                    <input type="number" id="temperature-input" placeholder="Digite um valor..." step="0.01">
+                </div>
+
+                <div class="scale-selectors">
+                    <div class="scale-group">
+                        <label for="from-scale">De:</label>
+                        <select id="from-scale">
+                            <option value="celsius">Celsius (°C)</option>
+                            <option value="fahrenheit">Fahrenheit (°F)</option>
+                            <option value="kelvin">Kelvin (K)</option>
+                        </select>
+                    </div>
+
+                    <div class="swap-btn">
+                        <button id="swap-btn" title="Trocar escalas">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                    </div>
+
+                    <div class="scale-group">
+                        <label for="to-scale">Para:</label>
+                        <select id="to-scale">
+                            <option value="fahrenheit">Fahrenheit (°F)</option>
+                            <option value="celsius">Celsius (°C)</option>
+                            <option value="kelvin">Kelvin (K)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="result-section">
+                    <div class="result-display">
+                        <span class="result-label">Resultado:</span>
+                        <span class="result-value" id="result-value">--</span>
+                        <span class="result-unit" id="result-unit">--</span>
+                    </div>
+                    <div class="formula-display" id="formula-display">
+                        <!-- Fórmula será exibida aqui -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-conversions">
+                <h3>Conversões Comuns</h3>
+                <div class="quick-grid">
+                    <button class="quick-btn" data-from="celsius" data-to="fahrenheit" data-value="0">
+                        0°C = 32°F
+                    </button>
+                    <button class="quick-btn" data-from="celsius" data-to="fahrenheit" data-value="100">
+                        100°C = 212°F
+                    </button>
+                    <button class="quick-btn" data-from="celsius" data-to="kelvin" data-value="0">
+                        0°C = 273.15K
+                    </button>
+                    <button class="quick-btn" data-from="fahrenheit" data-to="celsius" data-value="32">
+                        32°F = 0°C
+                    </button>
+                    <button class="quick-btn" data-from="fahrenheit" data-to="celsius" data-value="212">
+                        212°F = 100°C
+                    </button>
+                    <button class="quick-btn" data-from="kelvin" data-to="celsius" data-value="273.15">
+                        273.15K = 0°C
+                    </button>
+                </div>
+            </div>
+
+            <div class="temperature-info">
+                <h3>Informações sobre as Escalas</h3>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4><i class="fas fa-thermometer-empty"></i> Celsius (°C)</h4>
+                        <p>Escala baseada no ponto de congelamento (0°C) e ebulição (100°C) da água.</p>
+                        <ul>
+                            <li>Ponto de congelamento da água: 0°C</li>
+                            <li>Ponto de ebulição da água: 100°C</li>
+                            <li>Temperatura corporal: 37°C</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-thermometer-half"></i> Fahrenheit (°F)</h4>
+                        <p>Escala usada principalmente nos Estados Unidos e alguns outros países.</p>
+                        <ul>
+                            <li>Ponto de congelamento da água: 32°F</li>
+                            <li>Ponto de ebulição da água: 212°F</li>
+                            <li>Temperatura corporal: 98.6°F</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-thermometer-full"></i> Kelvin (K)</h4>
+                        <p>Escala absoluta de temperatura usada em ciências.</p>
+                        <ul>
+                            <li>Zero absoluto: 0K</li>
+                            <li>Ponto de congelamento da água: 273.15K</li>
+                            <li>Ponto de ebulição da água: 373.15K</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-container">
+            <div class="history-header">
+                <h3><i class="fas fa-history"></i> Histórico de Conversões</h3>
+                <button id="clear-history-btn" class="clear-btn">
+                    <i class="fas fa-trash"></i> Limpar
+                </button>
+            </div>
+            <div class="history-list" id="history-list">
+                <!-- Histórico será inserido aqui -->
+            </div>
+        </div>
+
+        <div class="actions">
+            <button id="export-btn" class="action-btn">
+                <i class="fas fa-download"></i> Exportar Histórico
+            </button>
+            <button id="theme-btn" class="action-btn">
+                <i class="fas fa-moon"></i> Tema Escuro
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

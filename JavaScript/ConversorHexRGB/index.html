@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor HEX-RGB</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Conversor HEX-RGB</h1>
+            <p>Converta cores entre formatos HEX e RGB</p>
+        </header>
+
+        <div class="converter-container">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="hex-input">HEX:</label>
+                    <input type="text" id="hex-input" placeholder="#FF0000">
+                </div>
+
+                <div class="input-group">
+                    <label for="rgb-input">RGB:</label>
+                    <input type="text" id="rgb-input" placeholder="255, 0, 0">
+                </div>
+            </div>
+
+            <div class="color-preview">
+                <div id="color-display"></div>
+                <div id="color-info"></div>
+            </div>
+        </div>
+
+        <div class="palette-container">
+            <h3>Paleta de Cores</h3>
+            <div id="color-palette"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
