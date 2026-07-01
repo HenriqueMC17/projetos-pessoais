@@ -18,11 +18,13 @@ All code within this repository must honor the following "Prime Laws":
 3. **Feature-Sliced Design (FSD):** Moving from layers (Controllers/Models) to Features/Domains.
 4. **Secure by Design:** Zero-trust input validation and "Hard-code Zero" for secrets.
 
+*Para governança de consistência em sistemas concorrentes e multi-core, consulte o guia [Foundations of Data Consistency in Multi-Core Systems: A Learner's Guide](file:///c:/Dev/Docs/Architecting%20the%20Agentic%20AI%20Economy/Foundations%20of%20Data%20Consistency%20in%20Multi-Core%20Systems_%20A%20Learner's%20Guide.md).*
+
 ### 🛠️ 3. Technology Landscape
 The repository is a modular ecosystem organized by technology stack:
 - **Frontend:** React, Next.js, TypeScript (Focus on INP, LCP, and A11y).
-- **Backend/Systems:** Go, Python, PHP, Java, C#, C++.
-- **Low-level/Hardware:** Arduino, C++.
+- **Backend/Systems:** Go, Python, PHP, Java, C#, C++. Para boas práticas de concorrência e tipagem segura nestes ambientes, consulte [Panorama of Reliable Technologies: A Guide to Memory Safety and Systems Optimization](file:///c:/Dev/Docs/Linguagens%20de%20Programação/Panorama%20of%20Reliable%20Technologies_%20A%20Guide%20to%20Memory%20Safety%20and%20Systems%20Optimization.md).
+- **Low-level/Hardware:** Arduino, C++. Otimizações físicas de hardware e layout de memória de alto desempenho seguem as diretrizes descritas em [The Speed of Thought: Why Memory Layout is the Secret Engine of Performance](file:///c:/Dev/Docs/Linguagens%20de%20Programação/The%20Speed%20of%20Thought_%20Why%20Memory%20Layout%20is%20the%20Secret%20Engine%20of%20Performance.md).
 - **Automation:** AppScript, n8n/MCP integrations.
 
 ### ⚙️ 4. Operational Mindset (The "Senior Agent" Protocol)
